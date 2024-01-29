@@ -1,0 +1,23 @@
+Consigne pour la troisième application :
+
+FAIT - Sur la page d'accueil il faut avoir un infinite scroll car l'api thecocktaildb à énormément de données + une page pour afficher le produit sur lequel on a cliquer
+
+FAIT - Dans le descriptif des produits il faut avoir la recette avec les vignettes comme sur shakeit
+
+FAIT - Il faut avoir une navigation avec plusieurs pages
+
+FAIT - Il faut la fonction de mettre des favories et avoir une page pour retrouver tout ces favories
+
+FAIT - avoir une interface avec une possibilité de trier les cocktails (fonction donné par l'API)
+
+FAIT - Si on a le temps mettre un moteur de recherche pour trier par ingrédients...
+
+Plus ou moins même affichage que ca en mode mobile
+https://shakeit.netlify.app/main
+
+https://www.thecocktaildb.com/
+
+1. Page Home contenant la liste des cocktails
+2. Page de détail des recettes
+3. Un menu sur la homepage
+4. Une page de favoris + une page au choix
