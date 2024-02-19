@@ -20,7 +20,7 @@ function FavoriteList({ navigation }) {
       keyExtractor={(item) => item.id}
       numColumns={1}
       renderItem={({ item }) => (
-        <TouchableOpacity style={styles.containerItem} onPress={() => navigation.navigate("Informations Cocktail", { cocktailId: item.id })}>
+        <TouchableOpacity style={styles.containerItem} onPress={() => navigation.navigate("Informations Cocktail", { cocktailId: item.id, previousPage: 'favoris' })}>
           <View style={styles.item}>
             <Image source={{ uri: item.image }} style={styles.image} />
             <View style={styles.itemContent}>

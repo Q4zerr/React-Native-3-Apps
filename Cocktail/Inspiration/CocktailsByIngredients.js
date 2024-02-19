@@ -40,7 +40,7 @@ function CocktailsByIngredients({ selectedIngredient, navigation }) {
           keyExtractor={(item) => item.idDrink}
           numColumns={1}
           renderItem={({ item, index }) => (
-            <TouchableOpacity key={index} style={styles.containerItem} onPress={() => navigation.navigate("Cocktails", { screen: "Informations Cocktail", params: { cocktailId: item.id } })}>
+            <TouchableOpacity key={index} style={styles.containerItem} onPress={() => navigation.navigate("Cocktails", { screen: "Informations Cocktail", params: { cocktailId: item.id, previousPage: 'cocktailsByIngredients' } })}>
               <View style={styles.item}>
                 <Image source={{ uri: item.image }} style={styles.image} />
                 <View style={styles.itemContent}>

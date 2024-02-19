@@ -38,7 +38,7 @@ function RandomCocktails({ navigation }) {
           <TouchableOpacity
             key={cocktail.id}
             style={styles.containerCocktail}
-            onPress={() => navigation.navigate("Cocktails", { screen: "Informations Cocktail", params: { cocktailId: cocktail.id } })}
+            onPress={() => navigation.navigate("Cocktails", { screen: "Informations Cocktail", params: { cocktailId: cocktail.id, previousPage: 'inspiration' } })}
           >
             <View key={index} style={styles.randomContent}>
               <Text style={styles.randomText}>{cocktail.name}</Text>

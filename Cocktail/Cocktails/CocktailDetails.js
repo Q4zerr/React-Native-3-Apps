@@ -6,7 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 // Composant pour affiché le détail de la recette d'un cocktail
 function CocktailDetails({ route }) {
   const navigation = useNavigation();
-  const { cocktailId } = route.params;
+  const { cocktailId, previousPage } = route.params;
   const [cocktailDetails, setCocktailDetails] = useState(null);
 
   // Construction de l'url de l'image du cocktail
@@ -44,13 +44,57 @@ function CocktailDetails({ route }) {
       .catch((error) => console.error(error));
   }, []);
 
+  // On défini le comportement des boutons selon la dernière page
+  const returnButton = () => {
+    switch (previousPage){
+        case 'inspiration':
+            return(
+                <TouchableOpacity onPress={() => navigation.reset({
+                    index: 0,
+                    routes: [{ name: 'Inspiration' }],
+                })} style={styles.returnButton}>
+                    <Ionicons name={"arrow-back-circle-outline"} size={38} color="#FA6D6D" />
+                </TouchableOpacity>
+            )
+        break;
+        case 'favoris':
+            return(
+                <TouchableOpacity onPress={async () => {
+                    navigation.goBack();
+                    // Attendre une réponse et rediriger l'utilisateur sur les favoris
+                    // Permet d'enlever la page informations cocktails et fixer un bug
+                    await new Promise(resolve => setTimeout(resolve, 50));
+                    navigation.navigate('Mes Favoris');
+                }} style={styles.returnButton}>
+                    <Ionicons name={"arrow-back-circle-outline"} size={38} color="#FA6D6D" />
+                </TouchableOpacity>
+            )
+        break;
+        case 'cocktails':
+            return(
+                <TouchableOpacity onPress={() => navigation.goBack()} style={styles.returnButton}>
+                    <Ionicons name={"arrow-back-circle-outline"} size={38} color="#FA6D6D" />
+                </TouchableOpacity>
+            )
+        break;
+        case 'cocktailsByIngredients':
+            return(
+                <TouchableOpacity onPress={() => navigation.reset({
+                    index: 0,
+                    routes: [{ name: 'Inspiration' }],
+                })} style={styles.returnButton}>
+                    <Ionicons name={"arrow-back-circle-outline"} size={38} color="#FA6D6D" />
+                </TouchableOpacity>
+            )
+        break;
+    }
+  }
+
   // Si le détail du cocktail n'a pas encore chargé alors on affiche un temps de chargement
   if (!cocktailDetails) {
     return (
       <View style={styles.containerDetails}>
-        <TouchableOpacity onPress={() => navigation.navigate("CocktailsScreen")} style={styles.returnButton}>
-          <Ionicons name={"arrow-back-circle-outline"} size={38} color="#FA6D6D" />
-        </TouchableOpacity>
+        {returnButton()}
         <ActivityIndicator size="large" color="#FA6D6D" />
       </View>
     );
@@ -58,9 +102,7 @@ function CocktailDetails({ route }) {
   // Si le détail du cocktail à charger on affiche un design avec le cocktail, son nom et les ingrédients avec leurs infos
   return (
     <View style={styles.cocktailDetails}>
-      <TouchableOpacity onPress={() => navigation.navigate("CocktailsScreen")} style={styles.returnButton}>
-        <Ionicons name={"arrow-back-circle-outline"} size={38} color="#FA6D6D" />
-      </TouchableOpacity>
+      {returnButton()}
       <View style={styles.containerDetails} key={cocktailDetails.idDrink}>
         <Text style={styles.cocktailName}>{cocktailDetails.name}</Text>
         <Image source={{ uri: cocktailDetails.image }} style={styles.image} />

@@ -35,7 +35,7 @@ const CocktailsByCategory = ({ selectedValue, navigation, favorites, toggleFavor
           keyExtractor={(item) => item.idDrink}
           numColumns={1}
           renderItem={({ item }) => (
-            <TouchableOpacity style={styles.containerItem} onPress={() => navigation.navigate("Informations Cocktail", { cocktailId: item.id })}>
+            <TouchableOpacity style={styles.containerItem} onPress={() => navigation.navigate("Informations Cocktail", { cocktailId: item.id, previousPage: 'cocktails' })}>
               <View style={styles.item}>
                 <Image source={{ uri: item.image }} style={styles.image} />
                 <View style={styles.itemContent}>
